@@ -8,7 +8,8 @@ module.exports = {
       {
         prepareCmd:
           "cd packages/fets-react-query-wrapper && pnpm version ${nextRelease.version} --no-git-tag-version",
-        publishCmd: "cd packages/fets-react-query-wrapper && pnpm publish",
+        publishCmd:
+          "cd packages/fets-react-query-wrapper && pnpm publish --no-git-checks",
       },
     ],
     [
