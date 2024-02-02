@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # or any version you prefer
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build packages
+        run: pnpm run build 
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for the semantic-release
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}  # NPM token for publishing packages
+        run: npx semantic-release
