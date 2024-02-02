@@ -1,25 +1,22 @@
 module.exports = {
   branches: ["main"],
-  repositoryUrl: "https://github.com/yourrepo/yourmonorepo.git",
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
+      "@semantic-release/exec",
+      {
+        prepareCmd:
+          "cd packages/fets-react-query-wrapper && pnpm version ${nextRelease.version} --no-git-tag-version",
+        publishCmd: "cd packages/fets-react-query-wrapper && pnpm publish",
+      },
+    ],
+    [
       "@semantic-release/npm",
       {
-        npmPublish: true,
-        pkgRoot: "packages/fets-react-query-wrapper",
+        npmPublish: false,
       },
     ],
     "@semantic-release/github",
-    [
-      "semantic-release-monorepo",
-      {
-        monorepo: {
-          analyzeCommits: ["@semantic-release/commit-analyzer"],
-          generateNotes: ["@semantic-release/release-notes-generator"],
-        },
-      },
-    ],
   ],
 };
