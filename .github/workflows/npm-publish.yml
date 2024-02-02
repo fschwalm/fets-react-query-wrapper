@@ -5,8 +5,16 @@ on:
     branches:
       - main  
 
+      
+
 jobs:
   release:
+    permissions:
+      contents: write
+      issues: write
+      pages: write
+      pull-requests: write
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
