@@ -1,4 +1,4 @@
-import { createResource } from "fets-react-query-wrapper";
+import { createMutationHook, createResource } from "fets-react-query-wrapper";
 import { CustomErrorBoundary } from "../CustomErrorBoundary";
 import { NotificationsClient } from "./notifications-client";
 
@@ -8,3 +8,6 @@ export const NotificationsResource = createResource({
   suspense: true,
   loader: <p>Loading...</p>,
 });
+
+export const useNotificationsMutations =
+  createMutationHook(NotificationsClient);

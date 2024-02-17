@@ -36,6 +36,7 @@ export default {
             type: "string",
           },
         },
+        required: ["id"],
       },
     },
   },
